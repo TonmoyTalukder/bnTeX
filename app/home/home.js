@@ -10,12 +10,31 @@ const bnToEnAlpha = {
     'ণ': 'N', 'ত': 't', 'থ': 'th', 'দ': 'd', 'ধ': 'dh', 'ন': 'n',
     'প': 'p', 'ফ': 'ph', 'ব': 'b', 'ভ': 'bh', 'ম': 'm', 'য': 'J',
     'র': 'r', 'হ': 'H', 'ক্ষ': 'kK', 'ল': 'l', 'শ': 'sh', 'ষ': 'Sh', 'স': 's',
-    'ড়': 'rh', 'ঢ়': 'rhh', 'য়': 'y', 'ৎ': 't//', 'ং': 'NNG', 'ঃ': 'h', 'ঁ': 'NN',
+    'ড়': 'rh', 'ঢ়': 'rhh', 'য়': 'y', 'ৎ': 't//', 'ং': 'NNG', 'ঃ': 'h', 'ঁ': 'NN',
     'া': 'a', 'ি': 'i', 'ী': 'ii', 'ু': 'u', 'ূ': 'uu', 'ৃ': 'rR',
     'ে': 'e', 'ৈ': 'oi', 'ৌ': 'ou', '্': ':/', '।': '.'
 };
 
+function replaceSpecialCharacters(word) {
+    const specialReplacements = { 'ড়': 'ড়', 'ঢ়': 'ঢ়', 'য়': 'য়' };
+    let updatedWord = '';
+    let i = 0;
+  
+    while (i < word.length) {
+      if (i < word.length - 1 && specialReplacements[word.slice(i, i + 2)]) {
+        updatedWord += specialReplacements[word.slice(i, i + 2)];
+        i += 2;  // Skip the next character
+      } else {
+        updatedWord += word[i];
+        i += 1;
+      }
+    }
+  
+    return updatedWord;
+  }
+
 function splitBengaliWord(word) {
+    word = replaceSpecialCharacters(word)
     const splitWord = [];
     let i = 0;
 
