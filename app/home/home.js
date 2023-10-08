@@ -67,6 +67,8 @@ function splitBengaliWord(word) {
         i += 1;
     }
 
+    console.log(splitWord)
+
     return splitWord;
 }
 
@@ -79,6 +81,8 @@ const HomePage = ({ label, value, onChange }) => {
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
     const [showCopyButton, setShowCopyButton] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [copyConfirm, setCopyConfirm] = useState(false);
     const [isFirstColumnVisible, setIsFirstColumnVisible] = useState(true);
 
     const handleInputChange = (event) => {
@@ -102,9 +106,19 @@ const HomePage = ({ label, value, onChange }) => {
     };
 
     const handleCopyButtonClick = () => {
-        navigator.clipboard.writeText(outputText);
-        alert('Text copied to clipboard!');
-    };
+        navigator.clipboard.writeText(outputText)
+          .then(() => {
+            setCopied(true);
+            setCopyConfirm(true);
+            setTimeout(() => {
+                setCopyConfirm(false);
+              }, 7000);
+          })
+          .catch((error) => {
+            console.error('Copy failed:', error);
+          });
+          
+      };
 
     const toggleFirstColumnVisibility = () => {
         setIsFirstColumnVisible(!isFirstColumnVisible);
@@ -240,6 +254,9 @@ const HomePage = ({ label, value, onChange }) => {
                         >
                             Copy Text
                         </button>
+                    )}
+                    {copyConfirm && (
+                        <p className='rounded-full bg-green-50 py-1 px-4 text-green-950'>☑️Text copied succesfully!</p>
                     )}
                 </div>
             </div>
