@@ -180,9 +180,9 @@ const HomePage = ({ label, value, onChange }) => {
                     <br></br>
                     <h1 className='text-xl'>Instructions:</h1>
                     <ol className='text-sm'>
-                        <li>1{')'} Begin by downloading the file <code>bangla_commands.tex</code> from this location.</li>
-                        <li>2{')'} Place the <code>bangla_commands.tex</code> file in the same folder as the main.tex file.</li>
-                        <li>3{')'} Insert the command <code>\input{'{'}bangla_commands{'}'}</code> after the <code>\documentclass</code> command.</li>
+                        <li>1{')'} Begin by downloading the file <code className='italic'>bangla_commands.tex</code> from this location.</li>
+                        <li>2{')'} Place the <code className='italic'>bangla_commands.tex</code> file in the same folder as the <code className='italic'>main.tex</code> file.</li>
+                        <li>3{')'} Insert the command <code className='italic'>\input{'{'}bangla_commands{'}'}</code> after the <code className='italic'>\documentclass</code> command.</li>
                         <li>4{')'} Your setup is now prepared. Convert any Bengali sentence into LaTeX commands here and then copy and paste it into the relevant sections of your LaTeX file.</li>
                     </ol>
                 </div>
