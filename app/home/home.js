@@ -19,19 +19,19 @@ function replaceSpecialCharacters(word) {
     const specialReplacements = { 'ড়': 'ড়', 'ঢ়': 'ঢ়', 'য়': 'য়' };
     let updatedWord = '';
     let i = 0;
-  
+
     while (i < word.length) {
-      if (i < word.length - 1 && specialReplacements[word.slice(i, i + 2)]) {
-        updatedWord += specialReplacements[word.slice(i, i + 2)];
-        i += 2;  // Skip the next character
-      } else {
-        updatedWord += word[i];
-        i += 1;
-      }
+        if (i < word.length - 1 && specialReplacements[word.slice(i, i + 2)]) {
+            updatedWord += specialReplacements[word.slice(i, i + 2)];
+            i += 2;  // Skip the next character
+        } else {
+            updatedWord += word[i];
+            i += 1;
+        }
     }
-  
+
     return updatedWord;
-  }
+}
 
 function splitBengaliWord(word) {
     word = replaceSpecialCharacters(word)
@@ -126,18 +126,18 @@ const HomePage = ({ label, value, onChange }) => {
 
     const handleCopyButtonClick = () => {
         navigator.clipboard.writeText(outputText)
-          .then(() => {
-            setCopied(true);
-            setCopyConfirm(true);
-            setTimeout(() => {
-                setCopyConfirm(false);
-              }, 7000);
-          })
-          .catch((error) => {
-            console.error('Copy failed:', error);
-          });
-          
-      };
+            .then(() => {
+                setCopied(true);
+                setCopyConfirm(true);
+                setTimeout(() => {
+                    setCopyConfirm(false);
+                }, 7000);
+            })
+            .catch((error) => {
+                console.error('Copy failed:', error);
+            });
+
+    };
 
     const toggleFirstColumnVisibility = () => {
         setIsFirstColumnVisible(!isFirstColumnVisible);
@@ -153,6 +153,20 @@ const HomePage = ({ label, value, onChange }) => {
         link.click();
     };
 
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
+    const buttonStyle = {
+        backgroundColor: isHovered ? '#3A7822' : '#69BA4B',
+    }
+
     return (
         <div className=''>
             <div style={{ height: '10%' }}>
@@ -165,30 +179,16 @@ const HomePage = ({ label, value, onChange }) => {
                 />
             </div>
             {isFirstColumnVisible ? (
-                <></> ) : (<p className='text-center'>Procedures</p>)}
+                <></>) : (<p className='text-center'>Procedures</p>)}
             <div className='flex justify-center'>
-            
-                    
+
+
                 <button
                     className="toggle-button"
                     onClick={toggleFirstColumnVisibility}
                 >
                     {isFirstColumnVisible ? (
                         <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 15l7-7 7 7"
-                        />
-                    </svg>
-                    ) : (<svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -199,16 +199,31 @@ const HomePage = ({ label, value, onChange }) => {
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth={2}
-                                d="M19 9l-7 7-7-7"
+                                d="M5 15l7-7 7 7"
                             />
                         </svg>
+                    ) : (<svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                        />
+                    </svg>
                     )}
                 </button>
             </div>
             <div className="flex flex-col md:flex-row" style={{ height: '80%' }}>
                 <div className={`md:w-1/5 p-4 bg-gray-200 ${isFirstColumnVisible ? '' : 'hidden'}`}>
                     {/* Content for the first column */}
-                    <button className='p-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4' onClick={handleDownload}>Download bangla_commands.tex</button>
+                    <button className='p-4 text-white font-bold py-2 px-4 rounded mt-4' style={buttonStyle} onClick={handleDownload} onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}>Download bangla_commands.tex</button>
                     <br></br>
                     <br></br>
                     <h1 className='text-xl'>Instructions:</h1>
@@ -279,8 +294,9 @@ const HomePage = ({ label, value, onChange }) => {
                     )}
                 </div>
             </div>
-            <div className='text-center pt-1' style={{ height: '10%' }}>
-                <p className='text-xl font-semibold text-green-500'>bnTeX: Latex solution for Bangla</p>
+            <div className='text-center pt-2' style={{ height: '10%' }}>
+                <p className='text-3xl font-bold'><span style={{ color: '#69BA4B' }}>bn</span><span style={{ color: '#C6C2E8' }}>TeX</span></p>
+                <p className='text-lg font-semibold' style={{ color: '#69BA4B' }}>LaTeX solution for Bangla</p>
                 <span className='text-slate-500'>&copy; {currentYear}, Tonmoy Talukder. All rights reserved.</span><br></br>
             </div>
         </div>
