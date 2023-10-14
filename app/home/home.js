@@ -108,10 +108,17 @@ const HomePage = ({ label, value, onChange }) => {
         setInputText(event.target.value);
     };
 
+    // const isBengali = (text) => {
+    //     const bengaliCharacters = /[\u0980-\u09FF]/;
+    //     return bengaliCharacters.test(text);
+    // };
+
     const isBengali = (text) => {
-        const bengaliCharacters = /[\u0980-\u09FF]/;
+        const bengaliCharacters = /[\u0980-\u09FF\u09E6-\u09EF।,;:'"!?(){}\[\]\-–—.@#$%^&*_+=<>\/|\\`~]/;
         return bengaliCharacters.test(text);
     };
+    
+    
 
     const handleProcessClick = () => {
         if (isBengali(inputText)) {
