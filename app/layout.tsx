@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'bnTeX: Latex solution for Bangla',
+  title: 'bnTeX: LaTeX solution for Bangla',
   description: 'Developed by Tonmoy Talukder, the 011.',
 }
 
